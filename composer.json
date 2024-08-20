@@ -3,7 +3,8 @@
         "psr-4": {
             "Src\\": "src/",
             "Core\\": "core/",
-            "Router\\": "Router/"
+            "Router\\": "Router/",
+            "Utils\\": "Utils/"
         }
     }
 }
