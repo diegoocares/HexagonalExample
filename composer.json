@@ -1,10 +1,9 @@
 {
-    "autoload": {
-        "psr-4": {
-            "Src\\": "src/",
-            "Core\\": "core/",
-            "Router\\": "Router/",
-            "Utils\\": "Utils/"
-        }
+  "autoload": {
+    "psr-4": {
+      "Src\\": "src/",
+      "Core\\": "core/",
+      "Router\\": "Router/"
     }
+  }
 }

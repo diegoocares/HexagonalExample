@@ -11,16 +11,15 @@ class GetUsers
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Summary of execute
      * @return UserResponse[]  Array of UserResponse objects
      */
-    public function execute(): array
+    public function execute(array $params): array
     {
-        $users = $this->userRepository->getAll();
+        $users = $this->userRepository->getAll($params);
 
         return array_map(function ($user) {
             return new UserResponse(

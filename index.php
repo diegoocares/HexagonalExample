@@ -6,6 +6,12 @@ require 'vendor/autoload.php';
 // Incluye el archivo del enrutador
 require 'Router/Router.php';
 
+// Incluye el archivo del manejador de excepciones
+require 'src/Shader/Domain/Exception/handleException.php';
+
+// Configura el manejador de excepciones global
+set_exception_handler('src\Shader\Domain\Exception\handleException');
+
 // Usa el namespace del enrutador
 use Router\Router;
 

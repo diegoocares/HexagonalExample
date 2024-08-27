@@ -13,9 +13,9 @@ return [
     'users' => function () use ($userController) {
       $userController->index();
     },
-    // 'users/{id}' => function ($userId) use ($userController) {
-    //   $userController->show((int)$userId);
-    // }
+    'users/{id}' => function ($userId) use ($userController) {
+      $userController->show((int)$userId);
+    }
   ],
   'POST' => [
     // 'users' => function () use ($userController) {

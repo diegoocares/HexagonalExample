@@ -12,7 +12,7 @@ interface UserRepositoryInterface
      * Summary of getAll
      * @return User[]  Array of User objects
      */
-    public function getAll(): array;
+    public function getAll(array $params = []): array;
     public function getById(int $userId): ?User;
     public function register(string $email, string $password): void;
     public function updateEmail(int $userId, string $email): void;
