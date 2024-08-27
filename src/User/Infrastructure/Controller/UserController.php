@@ -10,6 +10,7 @@ use Src\User\Aplication\UseCase\GetUser;
 use Src\User\Aplication\UseCase\GetUsers;
 use Src\User\Aplication\UseCase\RegisterUser;
 use Src\Shader\Infrastructure\Utils\QueryParams;
+use Src\Shader\Infrastructure\Utils\SuccessResponse;
 
 class UserController
 {
@@ -27,14 +28,14 @@ class UserController
         ];
         $getUsers = $this->container->get(GetUsers::class);
         $users = $getUsers->execute($params);
-        echo json_encode($users);
+        SuccessResponse::response('OK', $users);
     }
 
     public function show(int $userId)
     {
         $getUser = $this->container->get(GetUser::class);
         $user = $getUser->execute($userId);
-        echo json_encode($user);
+        SuccessResponse::response('OK', $user);
     }
 
     public function store()
@@ -49,11 +50,6 @@ class UserController
         );
 
         $registerUser->execute($userRequest);
-        echo json_encode(
-            [
-                'success' => true,
-                'message' => 'User registered successfully',
-            ]
-        );
+        SuccessResponse::response('User registered successfully.');
     }
 }
