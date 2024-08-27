@@ -18,13 +18,13 @@ return [
     }
   ],
   'POST' => [
-    // 'users' => function () use ($userController) {
-    //   $userController->store();
-    // },
+    'users' => function () use ($userController) {
+      $userController->store();
+    },
   ],
   'PUT' => [
-    'posts' => function () {
-      require __DIR__ . '/../src/controllers/updatePostController.php';
+    'users' => function () use ($userController) {
+      $userController->index();
     },
   ],
   'DELETE' => [
