@@ -16,11 +16,10 @@ class Conexion
 
     public function __construct()
     {
-        $config = require 'config.php';
-        $this->host = $config['host'];
-        $this->database = $config['database'];
-        $this->user = $config['user'];
-        $this->password = $config['password'];
+        $this->host = $_ENV['HOST'];
+        $this->database = $_ENV['DATABASE'];
+        $this->user = $_ENV['USER'];
+        $this->password = $_ENV['PASSWORD'];
     }
 
     public function getConexion(): PDO
@@ -31,7 +30,7 @@ class Conexion
 
             return $conexion;
         } catch (PDOException $e) {
-            throw new \RuntimeException("Error en la conexión a la base de datos: " . $e->getMessage(), (int)$e->getCode());
+            throw new \RuntimeException("Error en la conexión a la base de datos: " . $e->getMessage(), (int) $e->getCode());
         }
     }
 }

@@ -5,5 +5,8 @@
       "Core\\": "core/",
       "Router\\": "Router/"
     }
+  },
+  "require": {
+    "vlucas/phpdotenv": "^5.6"
   }
 }
