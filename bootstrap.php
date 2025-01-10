@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Dotenv\Dotenv;
 use Core\Container;
+use Src\Shader\Infrastructure\Database\Connection;
 use Src\User\Infrastructure\UserServiceProvider;
 use Src\User\Domain\Service\UserServiceInterface;
 use Src\User\Infrastructure\Service\S3UserService;
@@ -23,7 +24,7 @@ UserServiceProvider::register();
 
 // Registrar en el contenedor las implementaciones de las interfaces usando los singletons del ServiceProvider
 $container->set(UserRepositoryInterface::class, function() {
-    return new MySQLUserRespository();
+    return new MySQLUserRespository(new Connection());
 });
 
 $container->set(UserServiceInterface::class, function() {

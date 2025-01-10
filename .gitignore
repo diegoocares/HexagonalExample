@@ -1,3 +1,2 @@
-/src/Shader/Infrastructure/database/config.php
 .env
-vendor
+/vendor

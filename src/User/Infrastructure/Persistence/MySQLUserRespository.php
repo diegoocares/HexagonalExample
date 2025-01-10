@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace Src\User\Infrastructure\Persistence;
 
+use PDO;
 use Src\User\Domain\Model\User;
-use Src\Shader\Infrastructure\Database\Conexion;
+use Src\Shader\Infrastructure\Database\Connection;
 use Src\User\Domain\Repository\UserRepositoryInterface;
 
 class MySQLUserRespository implements UserRepositoryInterface
 {
+    private PDO $connection;
+    public function __construct(Connection $conexion) 
+    {
+        $this->connection = $conexion->getConexion();
+    }
     public function getAll(array $params = []): array
     {
-        $conexion = new Conexion();
-        $pdo = $conexion->getConexion();
-
         // Construir la consulta base
         $query = 'SELECT id, email, password, photo_url FROM users';
 
@@ -25,7 +28,7 @@ class MySQLUserRespository implements UserRepositoryInterface
         }
 
         // Preparar y ejecutar la consulta
-        $statement = $pdo->prepare($query);
+        $statement = $this->connection->prepare($query);
         foreach ($filters['bindings'] as $placeholder => $value) {
             $statement->bindValue($placeholder, $value);
         }
@@ -48,15 +51,12 @@ class MySQLUserRespository implements UserRepositoryInterface
 
     public function getById(int $userId): ?User
     {
-        $conexion = new Conexion();
-        $pdo = $conexion->getConexion();
-
         // Consulta para obtener el usuario por ID
         $query = 'SELECT id, email, password, photo_url FROM users WHERE id = :id';
 
         // Preparar y ejecutar la consulta
-        $statement = $pdo->prepare($query);
-        $statement->bindValue(':id', $userId, \PDO::PARAM_INT);
+        $statement = $this->connection->prepare($query);
+        $statement->bindValue(':id', $userId, PDO::PARAM_INT);
         $statement->execute();
 
         // Obtener el resultado
@@ -77,13 +77,10 @@ class MySQLUserRespository implements UserRepositoryInterface
 
     public function register(string $email, string $password): void
     {
-        $conexion = new Conexion();
-        $pdo = $conexion->getConexion();
-
         $query = 'INSERT INTO users (email, password) values (:email, :password)';
-        $statement = $pdo->prepare($query);
-        $statement->bindValue(':email', $email, \PDO::PARAM_STR);
-        $statement->bindValue(':password', $password, \PDO::PARAM_STR);
+        $statement = $this->connection->prepare($query);
+        $statement->bindValue(':email', $email, PDO::PARAM_STR);
+        $statement->bindValue(':password', $password, PDO::PARAM_STR);
         $statement->execute();
     }
 

@@ -7,7 +7,7 @@ namespace Src\Shader\Infrastructure\Database;
 use PDO;
 use PDOException;
 
-class Conexion
+class Connection
 {
     private string $host;
     private string $database;
